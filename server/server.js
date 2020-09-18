@@ -1,10 +1,7 @@
+require('./config/config')
 const express = require('express');
 const app = express();
-const port = 8080;
 const bodyParser = require('body-parser');
-
- 
-
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -38,6 +35,6 @@ app.post('/usuarios', function (req, res) {
     res.json('delete Usuario')
   });
 
-app.listen(8080, () =>{
-    console.log('Escuchando en: ', port);
+app.listen(process.env.PORT, () =>{
+    console.log('Escuchando en: ', process.env.PORT);
 })
