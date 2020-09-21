@@ -10,20 +10,19 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.listen(process.env.PORT, () => {
-    console.log('Escuchando en: ', process.env.PORT);
-});
-
 // Rutas de usuario 
 app.use(require('./routes/usuario'));
 
-mongoose.connect('mongodb://localhost:27017/cafe', {
+mongoose.connect(process.env.urlDB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true
-}).then((res)=>{
-    console.log('Base de datos online');
-}).catch((err)=>{
-console.log(err);
+},(err,res)=>{
+    if(err) throw err;
+
+    console.log('Base de datos ONLINE');
+});
+app.listen(process.env.PORT, () => {
+    console.log('Escuchando en: ', process.env.PORT);
 });
