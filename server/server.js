@@ -10,35 +10,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-
-
-// Usuarios
-app.get('/usuarios', function (req, res) {
-    res.json('get Usuario')
-});
-
-app.post('/usuarios', function (req, res) {
-    let persona = req.body;
-    res.json({
-        persona,
-    })
-});
-
-app.put('/usuarios/:id', function (req, res) {
-    let id = req.params.id;
-    res.json({
-        id,
-
-    })
-});
-
-app.delete('/usuarios', function (req, res) {
-    res.json('delete Usuario')
-});
-
 app.listen(process.env.PORT, () => {
     console.log('Escuchando en: ', process.env.PORT);
-})
+});
+
+// Rutas de usuario 
+app.use(require('./routes/usuario'));
 
 mongoose.connect('mongodb://localhost:27017/cafe', {
     useNewUrlParser: true,
